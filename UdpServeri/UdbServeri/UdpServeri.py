@@ -21,7 +21,7 @@ while True :
    mesazhi , addresa=serverSocket.recvfrom(2024)
    tekst=mesazhi.decode("utf-8")
    try:
-      if tekst == "IP" :
+      if tekst == "IP" : #GOJART DIELLORI
         ip=str(addresa)
         ip = ip.replace(" ", "")
         ip= ip.replace("'","")
@@ -29,7 +29,7 @@ while True :
         ipjuaj="Your ip is "+ip.split(",",1)[0]
         serverSocket.sendto(ipjuaj.encode("utf-8"),addresa) 
         numriKerkesave+=1  
-      elif tekst== "KENO":
+      elif tekst== "KENO":    #GEZIM KUCI
             while(i<20):
                 if(i!=19):
                     rand+=(str(random.randint(1,80))+',')
@@ -38,7 +38,7 @@ while True :
                 i+=1
             serverSocket.sendto(rand.encode("utf-8"),addresa)
             numriKerkesave+=1  
-      elif tekst == "TIME" :
+      elif tekst == "TIME" :  #GOJART DIELLORI
           if (time.localtime()[3] >= 12) :
                kohaPMAM="PM"
           else :
@@ -52,7 +52,7 @@ while True :
           koha=dita+"."+muaji+"."+viti+" "+ora+":"+minuta+":"+sekonda+" "+kohaPMAM
           serverSocket.sendto(koha.encode("utf-8"),addresa)  
           numriKerkesave+=1   
-      elif tekst == "HOST" :
+      elif tekst == "HOST" :  #ERMIRA XHELILI
           try:
             a=gethostname()
             serverSocket.sendto(a.encode("utf-8"),addresa)
@@ -60,15 +60,15 @@ while True :
             a="Emri i Hostit nuk u gjet "
             serverSocket.sendto(a.encode("utf-8"),addresa)
           numriKerkesave+=1    
-      elif tekst=="HELP":
+      elif tekst=="HELP":     #GEZIM KUCI
             kerkesat="Metodat e Serverit:\n\nMetoda:\t\tShpjegimi\t\t\t\tPerdorimi\n\nIP\t\tKthen IP Address te klientit\t\tIP\nNRKERKESAVE\tKthen nr e kerkesave te adresuara \tNRKERKESAVE\nSHKRUAJ\t\tShkruan tekst ne nje fajll\t\tSHKRUAJ{HAPSIRE}teksti\nPORT\t\tKthen port number te klientit\t\tPORT\nZANORE\t\tKthen numrin e zanoreve te tekstit\tZANORE{HAPSIRE}text\nPRINTO\t\tKthen tekstin e shkruar\t\t\tPRINTO{HAPSIRE}tekst\nHOST\t\tKthen emrin e hostit\t\t\tHOST\nTIME\t\tKthen kohen aktuale\t\t\tTIME\nKENO\t\tKthen 20 numra random [1,80]\t\tKENO\nFAKTORIEL\tKthen faktorielin e numrit te dhene\tFAKTORIEL{HAPSIRE}numer\nKONVERTO\tKonvertuesi i njesive te ndryshme\tKONVERTO{HAPSIRE}Opsioni\t\t   CelsiusToKelvin\t\t\t{HAPSIRE}numer\n\t\t   CelsiusToFahrenheit\n\t\t   KelvinToFahrenheit\n\t\t   KelvinToCelsius\n\t\t   FahrenheitToCelsius\n\t\t   FahrenheitToKelvin\n\t\t   PoundToKilogram\n\t\t   KilogramToPound\nLLOGARIT\tKthen vleren e llogaritur\t\tLLOGARIT{HAPSIRE}numri1\n\t\t  Operatoret: + - * /\t\t\t{HAPSIRE}operatori\n\t\t\t\t\t\t\t{HAPSIRE}numri2";
             serverSocket.sendto(kerkesat.encode("utf-8"),addresa)  
             numriKerkesave+=1       
-      elif tekst.startswith("ZANORE"):
+      elif tekst.startswith("ZANORE"):  #GEZIM KUCI
             a=mesazhi.decode("utf-8")
             serverSocket.sendto(("Teksti i derguar permban "+str(zanoret(a))+" zanore.").encode("utf-8"),addresa) 
             numriKerkesave+=1    
-      elif tekst.startswith("SHKRUAJ "):
+      elif tekst.startswith("SHKRUAJ "):     #GEZIM KUCI
             a=tekst.split()[1:]
             b=' '.join(a)
             f=open('python.txt','w')
@@ -77,13 +77,13 @@ while True :
             a="Te dhenat u ruajten me sukses!"
             serverSocket.sendto(a.encode("utf-8"),addresa)  
             numriKerkesave+=1  
-      elif tekst.startswith("PRINTO ") :
+      elif tekst.startswith("PRINTO ") :     #GOJART DIELLORI
             a=tekst.split()[1:]
             b=' '.join(a)
             serverSocket.sendto(b.encode("utf-8"),addresa) 
             numriKerkesave+=1  
 #serverSocket.sendto(vlera.encode("utf-8"),addresa)  
-      elif tekst.startswith("LLOGARIT ") :
+      elif tekst.startswith("LLOGARIT ") :   #GOJART DIELLORI
          try :
               if tekst.split()[2] == "+" :
                   b=str(int(tekst.split()[1])+int(tekst.split()[3]))
@@ -101,7 +101,7 @@ while True :
                   a="Nuk lejohet pjestimi me zero"
                   serverSocket.sendto(a.encode("utf-8"),addresa)
          numriKerkesave+=1  
-      elif tekst.startswith("EKIPI") :
+      elif tekst.startswith("EKIPI") :  #ERMIRA XHELILI
             if(tekst.split()[2]>tekst.split()[4]) :
                 a=str(tekst.split()[1]+" eshte ekip me i sukseshshem se "+tekst.split()[3])
                 serverSocket.sendto(a.encode("utf-8"),addresa)
@@ -111,7 +111,7 @@ while True :
             else :
                 a="Sheno EKIPI{hapsire}EKIPI1{hapisre}TITUJ1{hapsire}EKIPI2{hapsire}TITUJ2"
                 serverSocket.sendto(a.encode("utf-8"),addresa)
-      elif tekst.startswith("KRAHASO") :
+      elif tekst.startswith("KRAHASO") :     #ERMIRA XHELILI
             if(tekst.split()[2]==tekst.split()[4]) :
                 a="Qytetet jane te njejta"
                 serverSocket.sendto(a.encode("utf-8"),addresa) 
@@ -121,7 +121,7 @@ while True :
             else :
                 a="Sheno KRAHASO{hapsire}EMRI1{hapisre}QYTETI1{hapsire}EMRI2{hapsire}QYTETI2"
                 serverSocket.sendto(a.encode("utf-8"),addresa)
-      elif tekst.startswith("KontrolloVitin") :
+      elif tekst.startswith("KontrolloVitin") :   #BLERANDA ISUFI
         try:
           if (tekst.split()[1] % 4 == 0 and tekst.split()[1] %100 != 0 or tekst.split()[1] % 400 == 0):
  
@@ -130,7 +130,11 @@ while True :
         except:
               b="Nuk eshte vit i brishte."
               serverSocket.sendto(b.encode("utf-8"),addresa)
-      elif tekst.startswith("KONVERTO ") :  
+      elif tekst.startswith("SaPerqindZeNumri1neNumrin2") :  #BLERANDA ISUFI
+          b=str(100*int(tekst.split()[1])/int(tekst.split()[2]))
+          serverSocket.sendto(b.encode("utf-8"),addresa)
+    
+      elif tekst.startswith("KONVERTO ") :   #GOJART DIELLORI
            if tekst.split()[1] == "CelsiusToKelvin" :
                vlera=str(int(tekst.split()[2])+273.15) 
                serverSocket.sendto(vlera.encode("utf-8"),addresa) 
@@ -159,19 +163,19 @@ while True :
                 a="Sheno HELP"
                 serverSocket.sendto(a.encode("utf-8"),addresa)
            numriKerkesave+=1  
-      elif tekst.startswith("FAKTORIEL "):
+      elif tekst.startswith("FAKTORIEL "):   #GEZIM KUCI
             a=int(mesazhiMarrur.split()[1])
             serverSocket.sendto(str(math.factorial(a)).encode("utf-8"),addresa)
             numriKerkesave+=1    
-      elif tekst=="NRKERKESAVE":
+      elif tekst=="NRKERKESAVE":   #GEZIM KUCI
             serverSocket.sendto(str(numriKerkesave).encode("utf-8"),addresa)
-            numriKerkesave+=1             
-      elif tekst == "PORT" :
+            numriKerkesave+=1                
+      elif tekst == "PORT" :  #LATIF FETAHAJ
            y = str(addresa).replace(" ", "")
            y = y.replace(")", "")
            a=y.split(",",1)[1]
            serverSocket.sendto(a.encode("utf-8"),addresa)          
-      elif tekst.startswith("KRAHASO") :
+      elif tekst.startswith("KRAHASO") :     #ERMIRA XHELILI
             if(tekst.split()[2]==tekst.split()[4]) :
                 a="Qytetet jane te njejta"
                 serverSocket.sendto(a.encode("utf-8"),addresa) 
